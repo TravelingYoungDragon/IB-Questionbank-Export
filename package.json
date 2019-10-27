@@ -1,0 +1,18 @@
+{
+  "name": "testib",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "array-unique": "^0.3.2",
+    "get-hrefs": "^4.0.0",
+    "line-reader": "^0.4.0",
+    "readline-sync": "^1.4.10",
+    "website-scraper": "^4.2.0"
+  }
+}
