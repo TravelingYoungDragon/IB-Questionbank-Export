@@ -8,19 +8,25 @@ var readlineSync = require('readline-sync');
   
 console.log('What do you want to do?');
 
+var both = false;
+var endDelimiter;
+var outputFile;
+
 // Wait for user's response.
 var action = readlineSync.question('Download: 1 | Convert: 2  => ');
 if (action == 1) {
     console.log("Downloading...");
     downloadBank();
 } else if (action == 2) {
-    var delimiter = readlineSync.question('Marksceme: 1 | No Marksceme: 2  => ');
+    var delimiter = readlineSync.question('Marksceme: 1 | No Marksceme: 2 | Both: 3 => ');
     if (delimiter == 2) {
-        var endDelimiter = '<h2 style="margin-top: 1em">Markscheme</h2>';
-        var outputFile = './download/';
+        endDelimiter = '<h2 style="margin-top: 1em">Markscheme</h2>';
+        outputFile = './download/';
     } else if (delimiter == 1) {
-        var endDelimiter = '<h2>Syllabus sections</h2>';
-        var outputFile = './download/markSceme-';
+        endDelimiter = '<h2>Syllabus sections</h2>';
+        outputFile = './download/markSceme-';
+    } else if (delimiter == 3) {
+        both = true;
     } else {
         console.log("You did not enter a valid input...");
         process.exit(1);
@@ -28,8 +34,12 @@ if (action == 1) {
     var fileNumber = readlineSync.question('How many pages to convert?  => ');
     if (fileNumber < 1000) {
         console.log("Converting " + fileNumber + " pages...");
-        
-        runSeperateQuestions(fileNumber);
+
+        if (both == true) {
+            runBoth(fileNumber);
+        } else {
+            runSeperateQuestions(fileNumber);
+        }
 } else {
     console.log("That number was too big...");
 }
@@ -37,9 +47,27 @@ if (action == 1) {
     console.log("You did not enter a valid input...");
 }
 
+async function runBoth(file) {
 
-function downloadBank() {
-    var urls = getHrefs(fs.readFileSync('IBQ.htm', 'utf8'));
+    endDelimiter = '<h2>Syllabus sections</h2>';
+    outputFile = './download/markSceme-';
+
+    await runSeperateQuestions(file, outputFile, endDelimiter);
+    previousCodes = [];
+
+    endDelimiter = '<h2 style="margin-top: 1em">Markscheme</h2>';
+    outputFile = './download/';
+
+    await runSeperateQuestions(file, outputFile, endDelimiter);
+    previousCodes = [];
+
+}
+
+async function downloadBank() {
+
+    await getLinks('IBQ.htm');
+
+    var urls = getHrefs(output);
     var uniqueUrls = unique(urls);
     
     const options = {
@@ -53,7 +81,7 @@ function downloadBank() {
     });
 }
 
-async function runSeperateQuestions(fileNumber) {
+async function runSeperateQuestions(file, outputName, end) {
 
 
     var head = fs.readFileSync('./head.html', 'utf8');
@@ -71,8 +99,6 @@ async function runSeperateQuestions(fileNumber) {
         
         await getQuestion('./download/index_'+i+'.html');
     }
-    console.log(previousCodes);
-    
 }
 var previousCodes = [];
 function getQuestion(file) {
@@ -183,3 +209,36 @@ function getQuestion(file) {
     });
 }
 
+var output;
+function getLinks(file) {
+    var paper = 1;
+    var level = 'sl';
+    var reading = false;
+    var code = false;
+    var done = false;
+    return new Promise((resolve, reject) => {
+    lineReader.eachLine(file, function(line, last, cb) {
+        if (done == true) {
+            cb(false);
+        } else {
+            cb();
+        }
+        if (line.includes('<div class="footer">')) {
+            reading = false;
+            done = true;
+        }
+        if (reading == true) {
+          output += line;  
+        }
+        if (line.includes('<h3>Directly related questions</h3>')) {
+            reading = true;
+            console.log("Reading...");
+        }
+    }, function finished (err) {
+        if (err) return reject(err);
+        resolve();
+        console.log("Finished links!");
+        return true;
+      });
+    });
+}
