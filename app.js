@@ -103,6 +103,7 @@ async function runSeperateQuestions(file, outputName, end) {
 var previousCodes = [];
 function getQuestion(file) {
     var paper = 1;
+    var readPaper = false;
     var level = 'sl';
     var reading = false;
     var code = false;
@@ -181,17 +182,19 @@ function getQuestion(file) {
             }
             code = false;
         }
-        if (line.includes('Paper 1')) {
-            paper = 1;
-        } else if (line.includes('Paper 2')) {
-            paper = 2;
-        } else if (line.includes('Paper 3')) {
-            paper = 3;
-        }
-        if (line.includes('Higher level')) {
+        if (line.includes('<td class="info_label">Paper</td>')) {
+            readPaper = true;
+        } else if (readPaper == true) {
+           paper = line.match(/\d+/)[0]
+           readPaper = false;
+        } 
+        if (line.includes('<td class="info_value">HL only</td>')) {
             level = 'hl';
-        } else if (line.includes('Standard level')) {
+        } else if (line.includes('<td class="info_value">SL only</td>')) {
             level = 'sl';
+        }
+        else if (line.includes('<td class="info_value">SL and HL</td>')) {
+            process.exit(1);
         }
         if (line.includes('<h2>Question</h2>')) {
             reading = true;
