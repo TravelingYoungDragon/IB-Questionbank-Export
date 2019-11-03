@@ -144,6 +144,32 @@ function getQuestion(file) {
                     fs.appendFileSync(outputFile + 'HL-paper3.html', "<br><hr><br>");
                     console.log("Writing Finished.");
                 }
+            } else if (level == 'both') {
+                if (paper == 1) {
+                    fs.appendFileSync(outputFile + 'HL-paper1.html', "<br><hr><br>");
+                    console.log("Writing Finished.");
+                }
+                if (paper == 2) {
+                    fs.appendFileSync(outputFile + 'HL-paper2.html', "<br><hr><br>");
+                    console.log("Writing Finished.");
+                }
+                if (paper == 3) {
+                    fs.appendFileSync(outputFile + 'HL-paper3.html', "<br><hr><br>");
+                    console.log("Writing Finished.");
+                }
+                if (paper == 1) {
+                    fs.appendFileSync(outputFile + 'SL-paper1.html', "<br><hr><br>");
+                    console.log("Writing Finished.");
+                    
+                }
+                if (paper == 2) {
+                    fs.appendFileSync(outputFile + 'SL-paper2.html', "<br><hr><br>");
+                    console.log("Writing Finished.");
+                }
+                if (paper == 3) {
+                    fs.appendFileSync(outputFile + 'SL-paper3.html', "<br><hr><br>");
+                    console.log("Writing Finished.");
+                }
             }
             done = true;
         }
@@ -168,6 +194,25 @@ function getQuestion(file) {
                 if (paper == 3) {
                     fs.appendFileSync(outputFile + 'SL-paper3.html', line + '\r\n');
                 }   
+            } else if (level == 'both') {
+                if (paper == 1) {
+                    fs.appendFileSync(outputFile + 'SL-paper1.html', line + '\r\n');
+                }
+                if (paper == 2) {
+                    fs.appendFileSync(outputFile + 'SL-paper2.html', line + '\r\n');
+                }
+                if (paper == 3) {
+                    fs.appendFileSync(outputFile + 'SL-paper3.html', line + '\r\n');
+                }   
+                if (paper == 1) {
+                    fs.appendFileSync(outputFile + 'HL-paper1.html', line + '\r\n');
+                }
+                if (paper == 2) {
+                    fs.appendFileSync(outputFile + 'HL-paper2.html', line + '\r\n');
+                }
+                if (paper == 3) {
+                    fs.appendFileSync(outputFile + 'HL-paper3.html', line + '\r\n');
+                }
             }
         }
         if (code == true) {
@@ -194,7 +239,7 @@ function getQuestion(file) {
             level = 'sl';
         }
         else if (line.includes('<td class="info_value">SL and HL</td>')) {
-            process.exit(1);
+            level = 'both';
         }
         if (line.includes('<h2>Question</h2>')) {
             reading = true;

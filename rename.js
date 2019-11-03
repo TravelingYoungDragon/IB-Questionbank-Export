@@ -3,14 +3,14 @@ var fs = require('fs');
 var output = ['HL-paper1.pdf' ,'HL-paper2.pdf' ,'HL-paper3.pdf' ,'markscheme-HL-paper1.pdf' ,'markscheme-HL-paper2.pdf' ,'markscheme-HL-paper3.pdf' ,'markscheme-SL-paper1.pdf' ,'markscheme-SL-paper2.pdf' ,'markscheme-SL-paper3.pdf' ,'SL-paper1.pdf' ,'SL-paper2.pdf','SL-paper3.pdf'];
 
 //var folders = ["Option A","Option B","Option C","Option D","Topic 1","Topic 2","Topic 3","Topic 4","Topic 5","Topic 6","Topic 7","Topic 8","Topic 9","Topic 10","Topic 11"];
-var folders = ["Topic 1","Topic 2","Topic 3","Topic 4","Topic 5","Topic 6","Topic 7"];
-
+//var folders = ["Topic 1","Topic 2","Topic 3","Topic 4","Topic 5","Topic 6","Topic 7"];
+var folders = ["Changing space—the shrinking world","Disparities in wealth and development","Economic interactions and flows","Environmental change","Global interactions at the local level","Measuring global interactions","Option A","Option B","Option C","Option D","Option E","Option F","Option G","Patterns in environmental quality and sustainability","Patterns in resource consumption","Political outcomes","Populations in transition","Sociocultural exchanges"];
 for (let i = 0; i < folders.length; i++) {
     fs.mkdirSync('./IB_QB_Results/' + folders[i]);
 }
 
 
-var count = 84;
+var count = 216;
 
 var folderIndex = 0;
 var counter = 1;
