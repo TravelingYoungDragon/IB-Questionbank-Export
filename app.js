@@ -233,9 +233,9 @@ function getQuestion(file) {
            paper = line.match(/\d+/)[0]
            readPaper = false;
         } 
-        if (line.includes('<td class="info_value">HL only</td>')) {
+        if (line.includes('<td class="info_value">HL</td>')) {
             level = 'hl';
-        } else if (line.includes('<td class="info_value">SL only</td>')) {
+        } else if (line.includes('<td class="info_value">SL</td>')) {
             level = 'sl';
         }
         else if (line.includes('<td class="info_value">SL and HL</td>')) {
