@@ -1,7 +1,7 @@
 # IB Exported Questionbank
 ![https://raw.githubusercontent.com/IBanon/IB-Questionbank-Export/master/IB_QB_Results/HTML/index/images/logo.png](https://raw.githubusercontent.com/IBanon/IB-Questionbank-Export/master/IB_QB_Results/HTML/index/images/logo.png)
 
-Scraped the [IB Documents Team](ibdocuments.com) Questionbank. All published questions have been consolidated into their repective papers for each topic in a subject. Currently all math and sciences are available with the addition of Geography.
+Scraped the [IB Documents Team](https://www.ibdocuments.com/) Questionbank. All published questions have been consolidated into their repective papers for each topic in a subject. Currently all math and sciences are available with the addition of Geography.
 
 ## PDFs
 PDFs of each subject containing each topic and papers can be found in [releases](https://github.com/IBanon/IB-Questionbank-Export/releases).
