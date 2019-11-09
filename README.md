@@ -3,12 +3,11 @@
 
 Scraped the [IB Documents Team](https://www.ibdocuments.com/) Questionbank. All published questions have been consolidated into their repective papers for each topic in a subject. Currently all math and sciences are available with the addition of Geography.
 
-## PDFs
-PDFs of each subject containing each topic and papers can be found in [releases](https://github.com/IBanon/IB-Questionbank-Export/releases).
-
 ## HTML
 The scraped content can be browsed on this repo's Github Page here: [https://ibanon.github.io/IB-Questionbank-Export/](https://ibanon.github.io/IB-Questionbank-Export/)
 
+## PDFs
+PDFs of each subject containing each topic and papers can be found in [releases](https://github.com/IBanon/IB-Questionbank-Export/releases).
 
 ## Terms and conditions
 
